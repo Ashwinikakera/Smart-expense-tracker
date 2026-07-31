@@ -1,14 +1,4 @@
-"""
-Business logic layer for expenses.
-
-Storage: a simple JSON file on disk (no database). All expenses are kept in
-memory in a Python list while the app runs, and the list is persisted to
-the JSON file after every write so data survives a restart.
-
-This module deliberately has no FastAPI imports - it is pure business logic
-and can be unit-tested (or reused elsewhere) without spinning up the API.
-"""
-
+#Service layer for managing expenses.
 import json
 import os
 import uuid
@@ -20,23 +10,20 @@ DEFAULT_STORAGE_PATH = "data/expenses.json"
 
 
 class ExpenseNotFoundError(Exception):
-    """Raised when an expense id does not exist."""
-
+    #Raised when an expense is not found
     def __init__(self, expense_id: str):
         self.expense_id = expense_id
         super().__init__(f"Expense with id '{expense_id}' was not found")
 
 
 class ExpenseService:
-    """Encapsulates all expense CRUD + aggregation logic."""
-
+    #Handles expense operations.
     def __init__(self, storage_path: str = DEFAULT_STORAGE_PATH):
         self.storage_path = storage_path
         self._expenses: List[Expense] = []
         self._load()
 
-    # ---------- persistence helpers ----------
-
+    # Helper methods
     def _load(self) -> None:
         if os.path.exists(self.storage_path):
             with open(self.storage_path, "r", encoding="utf-8") as f:
@@ -56,8 +43,7 @@ class ExpenseService:
                 indent=2,
             )
 
-    # ---------- core operations ----------
-
+    # Expense operations
     def add_expense(self, payload: ExpenseCreate) -> Expense:
         expense = Expense(
             id=str(uuid.uuid4()),
@@ -97,19 +83,12 @@ class ExpenseService:
         raise ExpenseNotFoundError(expense_id)
 
 
-# ---------- singleton accessor (used as a FastAPI dependency) ----------
-
+# FastAPI dependency
 _default_service: Optional[ExpenseService] = None
 
 
 def get_expense_service() -> ExpenseService:
-    """
-    FastAPI dependency that returns a process-wide ExpenseService singleton.
-
-    Tests override this dependency (see tests/conftest.py) so each test run
-    gets its own isolated ExpenseService pointed at a temporary JSON file,
-    instead of touching the real data/expenses.json file.
-    """
+    #Returns the expense service instance.
     global _default_service
     if _default_service is None:
         _default_service = ExpenseService()

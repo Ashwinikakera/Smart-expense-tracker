@@ -1,10 +1,4 @@
-"""
-Smart Expense Tracker - FastAPI application entrypoint.
-
-Run with:
-    uvicorn src.main:app --reload
-"""
-
+#Main FastAPI application.
 from fastapi import FastAPI
 
 from src.routes.expense_routes import router as expense_router
@@ -15,6 +9,7 @@ app = FastAPI(
     version="1.0.0",
 )
 
+# Register expense routes
 app.include_router(expense_router)
 
 

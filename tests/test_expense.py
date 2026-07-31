@@ -1,12 +1,7 @@
-"""
-Tests for the Smart Expense Tracker API.
-
-Covers: adding an expense, fetching all, filtering by category,
-overall + category totals, and deletion (including the 404 case).
-"""
-
+#Tests for the Smart Expense Tracker API.
 
 def _sample_payload(title="Lunch", amount=250.0, category="Food", date="2026-07-30"):
+    # Sample expense data used in tests
     return {"title": title, "amount": amount, "category": category, "date": date}
 
 
@@ -25,13 +20,14 @@ def test_add_expense(client):
 def test_add_expense_rejects_invalid_amount(client):
     response = client.post("/expenses", json=_sample_payload(amount=-10))
 
+    # Amount should be greater than zero
     assert response.status_code == 422  # FastAPI/Pydantic validation error
 
 
 def test_get_all_expenses(client):
     client.post("/expenses", json=_sample_payload(title="Lunch"))
     client.post("/expenses", json=_sample_payload(title="Taxi", category="Transport"))
-
+    # Category filter should ignore letter case
     response = client.get("/expenses")
 
     assert response.status_code == 200

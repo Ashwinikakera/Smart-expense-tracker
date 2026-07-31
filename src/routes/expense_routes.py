@@ -1,11 +1,4 @@
-"""
-HTTP layer (controllers) for the expenses resource.
-
-Responsibilities kept strictly to: request/response wiring, status codes,
-and translating service-layer exceptions into HTTP errors. All business
-logic lives in src/services/expense_service.py.
-"""
-
+#API routes for managing expenses.
 from typing import List, Optional
 
 from fastapi import APIRouter, Depends, HTTPException, Query, status
@@ -44,6 +37,7 @@ def list_expenses(
     ),
     service: ExpenseService = Depends(get_expense_service),
 ) -> List[Expense]:
+    # Return filtered expenses if category is provided
     if category:
         return service.get_by_category(category)
     return service.get_all()
@@ -57,6 +51,7 @@ def list_expenses(
 def get_totals(
     service: ExpenseService = Depends(get_expense_service),
 ) -> TotalsResponse:
+    # Return overall and category-wise totals
     return TotalsResponse(
         overall_total=service.get_overall_total(),
         by_category=service.get_totals_by_category(),
