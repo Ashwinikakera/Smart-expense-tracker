@@ -1,0 +1,58 @@
+[
+  {
+    "title": "Lunch with team",
+    "amount": 450.5,
+    "category": "Food",
+    "date": "2026-07-30",
+    "id": "0136925b-1c6c-4d48-ac35-099725be15c8"
+  },
+  {
+    "title": "Groceries",
+    "amount": 850.75,
+    "category": "Food",
+    "date": "2026-07-25",
+    "id": "e004f566-9044-4f50-9299-b151052e4dbe"
+  },
+  {
+    "title": "Uber to airport",
+    "amount": 620.0,
+    "category": "Transport",
+    "date": "2026-07-26",
+    "id": "26122e82-9686-4f9c-9c4b-3f773e8fd9e4"
+  },
+  {
+    "title": "Movie night",
+    "amount": 400.0,
+    "category": "Entertainment",
+    "date": "2026-07-27",
+    "id": "5e3efd3a-4882-4094-b03e-c1fb923f3b2a"
+  },
+  {
+    "title": "New headphones",
+    "amount": 2999.0,
+    "category": "Shopping",
+    "date": "2026-07-28",
+    "id": "0be5262d-4755-4b87-a3af-4f17f2172e88"
+  },
+  {
+    "title": "Electricity bill",
+    "amount": 1450.0,
+    "category": "Utilities",
+    "date": "2026-07-29",
+    "id": "ae0b2fdb-c952-49f2-a8fd-7c4321a7d8e4"
+  },
+  {
+    "title": "Coffee with friend",
+    "amount": 180.0,
+    "category": "Food",
+    "date": "2026-07-29",
+    "id": "860b2ea3-410e-44e6-82fa-166fc33d5e7c"
+  },
+  {
+    "title": "Coffee with friend",
+    "amount": 180.0,
+    "category": "Food",
+    "date": "2026-07-29",
+    "id": "24bb6b68-187b-4bb2-92e6-6931af6593e1"
+  }
+]
